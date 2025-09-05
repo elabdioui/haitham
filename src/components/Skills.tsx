@@ -49,8 +49,6 @@ export default function Skills() {
           {/* Vous pouvez également modifier les propriétés du IconCloud si le composant les accepte */}
           <IconCloud
             images={images}
-            size={80}
-            scale={1.2}
           />
         </div>
       </div>
