@@ -436,7 +436,7 @@ export function Contact() {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-8 max-w-2xl mx-auto">
             <blockquote className="text-xl text-gray-300 italic mb-4">
-              "Le code est comme l'humour. Quand vous devez l'expliquer, c'est mauvais."
+              &ldquo;Le code est comme l&apos;humour. Quand vous devez l&apos;expliquer, c&apos;est mauvais.&rdquo;
             </blockquote>
             <cite className="text-sm text-gray-500">— Cory House</cite>
           </div>
