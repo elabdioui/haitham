@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 // Types pour le formulaire
 interface FormData {
@@ -17,13 +17,6 @@ interface FormErrors {
   message?: string;
 }
 
-interface Particle {
-  left: string;
-  top: string;
-  animationDelay: string;
-  animationDuration: string;
-}
-
 export function Contact() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -35,19 +28,7 @@ export function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [particles, setParticles] = useState<Particle[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
-
-  // Génération des particules uniquement côté client pour éviter les erreurs d'hydratation
-  useEffect(() => {
-    const newParticles = Array.from({ length: 30 }).map(() => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 3}s`,
-      animationDuration: `${2 + Math.random() * 3}s`,
-    }));
-    setParticles(newParticles);
-  }, []);
 
   // Réseaux sociaux
   const socialLinks = [
@@ -185,15 +166,15 @@ export function Contact() {
       {/* Background animé */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20" />
       <div className="absolute inset-0">
-        {particles.map((particle, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-20 animate-pulse"
             style={{
-              left: particle.left,
-              top: particle.top,
-              animationDelay: particle.animationDelay,
-              animationDuration: particle.animationDuration,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
             }}
           />
         ))}
