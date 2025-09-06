@@ -1,6 +1,6 @@
 import { Navbar } from '@/components/Navbar'
-import  Hero  from "@/components/Hero";
-import About  from '@/components/About';
+import Hero from "@/components/Hero";
+import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Education from '@/components/Education';
 import { Projects } from '@/components/Projects';
@@ -10,21 +10,10 @@ import { Contact } from '@/components/Contact';
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full bg-black relative">
-      {/* Dark White Dotted Grid Background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: "#000000",
-          backgroundImage: `
-            radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px)
-          `,
-          backgroundSize: "30px 30px",
-          backgroundPosition: "0 0",
-        }}
-      />
+    <main className="min-h-screen w-full relative">
+      {/* Le DotGrid est maintenant dans le layout, donc nous supprimons l'arrière-plan ici */}
       
-      {/* Content */}
+      {/* Content avec z-index pour le placer au-dessus du DotGrid */}
       <div className="relative z-10">
         <Navbar />
         <Hero />

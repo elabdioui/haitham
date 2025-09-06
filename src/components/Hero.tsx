@@ -1,9 +1,9 @@
 "use client"
-import { AuroraText } from "@/components/magicui/aurora-text";
+import { AuroraText } from "@/components/ui/magicui/aurora-text";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
-import { FlipText } from "@/components/magicui/flip-text";
-// Un texte plus court pour tester
-//traduire en anglais
+import { FlipText } from "@/components/ui/magicui/flip-text";
+import { RainbowButton } from "./ui/magicui/rainbow-button";
+
 const words = "Passionate about web and mobile development, I create modern and efficient applications using the latest technologies.";
 
 export default function Hero() {
@@ -14,13 +14,7 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
       >
-        <div
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-          }}
-          className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72rem]"
-        />
+        
       </div>
 
       <div className="mx-auto max-w-2xl py-24 sm:py-32 lg:py-40">
@@ -44,28 +38,8 @@ export default function Hero() {
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-x-6">
-            <button
-              onClick={() => {
-                const element = document.getElementById("projects");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="rounded-md bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 transition-all duration-200"
-            >
-              Voir mes projets
-            </button>
-            <button
-              onClick={() => {
-                const element = document.getElementById("contact");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="text-sm font-semibold text-white hover:text-gray-300 transition-colors duration-200"
-            >
-              Me contacter <span aria-hidden="true">→</span>
-            </button>
+            <RainbowButton >Voir mes projets</RainbowButton>
+            <RainbowButton>Me contacter</RainbowButton>
           </div>
         </div>
       </div>

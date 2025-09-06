@@ -1,6 +1,6 @@
 "use client";
 
-import { IconCloud } from "@/components/magicui/icon-cloud";
+import { IconCloud } from "@/components/ui/magicui/icon-cloud";
 
 const slugs = [
   "typescript",
