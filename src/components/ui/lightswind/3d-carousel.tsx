@@ -50,7 +50,6 @@ const Carousel3D = ({
   title = "From Textile to Intelligence",
   subtitle = "Customer Cases",
   tagline = "Explore how our textile sensor technology is revolutionizing multiple industries with intelligent fabric solutions tailored to specific needs.",
-  isMobileSwipe = true,
   imageConfig, // Récupérer la nouvelle prop ici
 }: Carousel3DProps) => {
   const [active, setActive] = useState(0);
