@@ -32,7 +32,7 @@ export function Projects() {
       id: 1,
       title: "Banking Transaction System",
       description: "High-performance banking transaction system built with native C++ for real-time processing, secure transfers, and transaction management with multi-threading support",
-      image: "/banking-system.jpg",
+      image: "/banking.jpeg", // Added leading slash
       technologies: ["C++", "STL", "Multi-threading", "SQLite", "Encryption", "Socket Programming"],
       category: "backend",
       githubUrl: "https://github.com/elabdioui/Gestion-des-comptes-bancaires",
@@ -44,7 +44,7 @@ export function Projects() {
       id: 2,
       title: "BMEKOG E-Commerce Platform",
       description: "Modern e-commerce platform built with ASP.NET Core 9, featuring secure authentication, payment processing, inventory management, and responsive React frontend",
-      image: "/bmekog.jpg",
+      image: "/ecommerce.jpg", // Added leading slash
       technologies: ["C#", "ASP.NET Core 9", "React", "Entity Framework", "Microsoft Identity", "SQL Server", "Redux"],
       category: "fullstack",
       githubUrl: "https://github.com/elabdioui/EcommerceProjectNew",
@@ -56,7 +56,7 @@ export function Projects() {
       id: 3,
       title: "Enterprise Ticketing System",
       description: "Complete issue tracking and ticketing management system using full Microsoft stack with DevOps integration, automated workflows, and real-time notifications",
-      image: "/ticketing.jpg",
+      image: "/ticketing.jpg", // Added leading slash
       technologies: ["C#", "ASP.NET", "Razor Pages", "Entity Framework", "Azure DevOps", "Azure App Services", "SignalR"],
       category: "Cloud Devops",
       githubUrl: "https://github.com/elabdioui/Ticketing-System",
@@ -68,7 +68,7 @@ export function Projects() {
       id: 4,
       title: "Insurance Claims Microservices",
       description: "Enterprise insurance and claims management platform with microservices architecture, featuring comprehensive monitoring, CI/CD pipeline, and containerized deployment",
-      image: "/insurance.jpg",
+      image: "/sinistre.jpg", // Added leading slash
       technologies: ["Spring Boot", "Angular", "Docker", "Jenkins", "Prometheus", "Grafana", "SonarQube", "Zipkin", "API Gateway"],
       category: "Cloud Devops",
       githubUrl: "https://github.com/elabdioui/Sinistre",
@@ -78,9 +78,9 @@ export function Projects() {
     },
     {
       id: 5,
-      title: "WildRDyes Serverless Platform",
+      title: "WildRydes Serverless Platform",
       description: "Fully serverless application deployed on AWS, leveraging cloud-native services for scalable, secure, and cost-effective solution with serverless architecture",
-      image: "/wildrdyes.jpg",
+      image: "/aws.jpg",
       technologies: ["AWS Lambda", "AWS Cognito", "API Gateway", "DynamoDB", "S3", "CloudFront", "IAM", "Node.js"],
       category: "Cloud Devops",
       githubUrl: "https://github.com/elabdioui/wildRydes-site",
@@ -92,7 +92,7 @@ export function Projects() {
       id: 6,
       title: "GC Systems Security",
       description: "Professional landing page for security and fire protection company, featuring modern design, animations, and optimized performance with SEO implementation",
-      image: "/gcsystems.jpg",
+      image: "/gcsystems.png",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "SEO", "Vercel"],
       category: "frontend",
       githubUrl: "https://github.com/elabdioui/gcsystems",
@@ -105,7 +105,7 @@ export function Projects() {
       id: 7,
       title: "Car Rental System",
       description: "A web application for managing car rentals, built with Django and SQLite",
-      image: "/car_rental.jpg",
+      image: "/car.jpeg",
       technologies: ["Python", "Django", "SQLite", "HTML", "CSS", "JavaScript"],
       category: "fullstack",
       githubUrl: "https://github.com/elabdioui/Django-PFA",
@@ -224,7 +224,7 @@ export function Projects() {
                   <div className="relative h-52 w-full overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-10"></div>
                     <Image
-                      src={project.image || "/placeholder-project.jpg"}
+                      src={project.image.startsWith('/') ? project.image : `/${project.image}`}
                       alt={project.title}
                       className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-in-out"
                       fill

@@ -16,7 +16,7 @@ export default function About() {
           <div className="lg:col-span-1 text-center">
             <div className="relative inline-block">
               <img
-                src="/haitham.jpg"
+                src="haitham.jpg"
                 alt="Votre nom"
                 className="w-48 h-48 rounded-full object-cover border-4 border-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"
               />
