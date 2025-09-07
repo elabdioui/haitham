@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { JetBrains_Mono } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import DotGrid from "@/components/ui/DotGrid";
 
-// Load JetBrains Mono
-const jetBrainsMono = JetBrains_Mono({
+// Load Nunito Sans
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   weight: ["400", "700"], // Normal + Bold
-  variable: "--font-jetbrains-mono",
+  variable: "--font-nunito-sans",
   display: 'swap',
 });
 
@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${jetBrainsMono.variable}`}>
-      <body className={`${jetBrainsMono.className} font-mono bg-black`}>
+    <html lang="fr" className={`${nunitoSans.variable}`}>
+      <body className={`${nunitoSans.className} font-mono bg-black`}>
         {/* DotGrid en arrière-plan */}
         <DotGrid
           dotSize={5}

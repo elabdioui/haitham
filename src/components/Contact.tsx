@@ -45,7 +45,7 @@ export function Contact() {
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/haitham-el-abdioui',
+      url: 'https://linkedin.com/in/haithamelabdioui',
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -161,10 +161,11 @@ export function Contact() {
             </svg>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Travaillons <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Ensemble</span>
+            Let&apos;s work  <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Together</span>
           </h2>
+          {/* translate to english */}
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Une idée de projet ? Une collaboration ? Je suis toujours ouvert à de nouvelles opportunités passionnantes
+           Any ideas ? Collaboration ? I am always open to any contribution or project. Don&apos;t hesitate to contact me using the form below or via my social networks.
           </p>
         </div>
 
@@ -173,9 +174,7 @@ export function Contact() {
           <div className="space-y-8">
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                  ✉️
-                </span>
+                
                Contact me
               </h3>
 
@@ -189,7 +188,7 @@ export function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Nom complet *
+                      Full name *
                     </label>
                     <input
                       type="text"
@@ -222,7 +221,7 @@ export function Contact() {
                           ? 'border-red-500 focus:ring-red-500/50'
                           : 'border-white/20 focus:border-blue-500 focus:ring-blue-500/50'
                       }`}
-                      placeholder="votre@email.com"
+                      placeholder="your@email.com"
                     />
                     {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
                   </div>
@@ -243,7 +242,7 @@ export function Contact() {
                         ? 'border-red-500 focus:ring-red-500/50'
                         : 'border-white/20 focus:border-blue-500 focus:ring-blue-500/50'
                     }`}
-                    placeholder="Objet de votre message"
+                    placeholder="Subject of your message"
                   />
                   {errors.subject && <p className="mt-1 text-sm text-red-400">{errors.subject}</p>}
                 </div>
@@ -263,7 +262,7 @@ export function Contact() {
                         ? 'border-red-500 focus:ring-red-500/50'
                         : 'border-white/20 focus:border-blue-500 focus:ring-blue-500/50'
                     }`}
-                    placeholder="Décrivez votre projet ou votre message..."
+                    placeholder="Describe your project or message..."
                   />
                   {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
                 </div>
@@ -297,9 +296,7 @@ export function Contact() {
             {/* Informations personnelles */}
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                  📱
-                </span>
+                
                 My contact information
               </h3>
 
@@ -349,9 +346,7 @@ export function Contact() {
             {/* Réseaux sociaux */}
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                  🌐
-                </span>
+                
                 Follow me
               </h3>
 

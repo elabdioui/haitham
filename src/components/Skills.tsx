@@ -10,20 +10,16 @@ const slugs = [
   "react",
   "flutter",
   "android",
-  "html5",
-  "css3",
-  "nodedotjs",
-  "express",
-  "nextdotjs",
-  "prisma",
+  "ios",
+  "azure",
   "amazonaws",
   "postgresql",
   "firebase",
   "nginx",
-  "vercel",
-  "testinglibrary",
-  "jest",
-  "cypress",
+  "aspnet",
+  "nodejs",
+  "vuejs",
+  "angular",
   "docker",
   "git",
   "jira",
@@ -32,7 +28,50 @@ const slugs = [
   "visualstudiocode",
   "androidstudio",
   "sonarqube",
-  "figma",
+  "springboot",
+  "tailwindcss",
+  "django",
+  "nextdotjs",
+  "nestjs",
+  "mongoDB",
+  "redis",
+  "graphql",
+  "kubernetes",
+  "linux",
+  "jenkins",
+  "vscode",
+  "gcloud",
+  "laravel",
+  "php",
+  "csharp",
+  "python",
+  "cplusplus",
+  "html5",
+  "css3",
+  "sass",
+  "bootstrap",
+  "webpack",
+  "sqlite",
+  "sqlserver",
+  "mysql",
+  "jee",
+  "bitbucket",
+  "latex",
+  "overleaf",
+  "visualbasic",
+  "jetbrains",
+  "intellijidea",
+  "eclipseide",
+  "helm",
+  "rabbitmq",
+  "prometheus",
+  "grafana",
+  "elasticsearch",
+  "grafana",
+  "restfulapi",
+  "oauth",
+  "jwt",
+  "powerbi",
 ];
 
 export default function Skills() {
@@ -42,13 +81,15 @@ export default function Skills() {
 
   return (
     <section id="skills" className="min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <h2 className="text-4xl font-bold text-white mb-16 text-center">Skills</h2>
-        {/* Augmenté la hauteur de 500px à 600px et ajouté w-full pour occuper toute la largeur */}
-        <div className="relative flex w-full h-[900px] items-center justify-center overflow-hidden">
-          {/* Vous pouvez également modifier les propriétés du IconCloud si le composant les accepte */}
+  
+        <div className="relative flex w-full items-center justify-center overflow-hidden">
           <IconCloud
             images={images}
+            canvasSize={800}    // Custom canvas size
+            iconSize={70}       // Custom icon size
+            sphereRadius={250}  // Custom sphere radius
           />
         </div>
       </div>

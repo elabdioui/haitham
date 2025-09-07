@@ -2,6 +2,7 @@
 import { Timeline } from "./ui/timeline";
 import { useState } from "react";
 
+
 export default function Education() {
   const educationData = [
     {
@@ -96,10 +97,8 @@ export default function Education() {
       <div className="container mx-auto pt-10 relative z-10">
         {/* Custom header before the Timeline component */}
         <div className="text-center mb-8 px-4">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl mb-6">
-            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3z" />
-            </svg>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Education</h2>
           </div>
         </div>
         

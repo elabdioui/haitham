@@ -1,8 +1,27 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { FloatingParticles, ProjectData, FilterData } from './ui/card3D';
-import { ThreeDMarquee } from './ui/lightswind/3d-marquee';
+import { FloatingParticles } from './ui/card3D';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+interface ProjectData {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  category: string;
+  githubUrl: string;
+  liveUrl: string;
+  featured: boolean;
+  gradient: string;
+}
+
+interface FilterData {
+  key: string;
+  label: string;
+}
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -11,84 +30,99 @@ export function Projects() {
   const projectsData: ProjectData[] = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "Complete e-commerce platform with cart, payment, and inventory management",
-      image: "/project1.jpg",
-      technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      category: "fullstack",
-      githubUrl: "https://github.com/votre-username/ecommerce",
-      liveUrl: "https://votre-ecommerce.vercel.app",
+      title: "Banking Transaction System",
+      description: "High-performance banking transaction system built with native C++ for real-time processing, secure transfers, and transaction management with multi-threading support",
+      image: "/banking-system.jpg",
+      technologies: ["C++", "STL", "Multi-threading", "SQLite", "Encryption", "Socket Programming"],
+      category: "backend",
+      githubUrl: "https://github.com/elabdioui/Gestion-des-comptes-bancaires",
+      liveUrl: "/404",
       featured: true,
-      gradient: "from-blue-600 via-purple-600 to-indigo-600"
+      gradient: "from-blue-600 via-cyan-600 to-teal-600"
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "Collaborative task management application with real-time features",
-      image: "/project2.jpg",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
+      title: "BMEKOG E-Commerce Platform",
+      description: "Modern e-commerce platform built with ASP.NET Core 9, featuring secure authentication, payment processing, inventory management, and responsive React frontend",
+      image: "/bmekog.jpg",
+      technologies: ["C#", "ASP.NET Core 9", "React", "Entity Framework", "Microsoft Identity", "SQL Server", "Redux"],
       category: "fullstack",
-      githubUrl: "https://github.com/votre-username/task-manager",
-      liveUrl: "https://votre-task-app.netlify.app",
-      featured: false,
-      gradient: "from-emerald-600 via-teal-600 to-cyan-600"
+      githubUrl: "https://github.com/elabdioui/EcommerceProjectNew",
+      liveUrl: "/404",
+      featured: true,
+      gradient: "from-purple-600 via-violet-600 to-indigo-600"
     },
     {
       id: 3,
-      title: "Portfolio Designer",
-      description: "Portfolio creation tool with customizable templates",
-      image: "/project3.jpg",
-      technologies: ["Vue.js", "Nuxt.js", "Tailwind CSS", "Supabase"],
-      category: "frontend",
-      githubUrl: "https://github.com/votre-username/portfolio-builder",
-      liveUrl: "https://portfolio-builder.vercel.app",
+      title: "Enterprise Ticketing System",
+      description: "Complete issue tracking and ticketing management system using full Microsoft stack with DevOps integration, automated workflows, and real-time notifications",
+      image: "/ticketing.jpg",
+      technologies: ["C#", "ASP.NET", "Razor Pages", "Entity Framework", "Azure DevOps", "Azure App Services", "SignalR"],
+      category: "Cloud Devops",
+      githubUrl: "https://github.com/elabdioui/Ticketing-System",
+      liveUrl: "/404",
       featured: true,
-      gradient: "from-pink-600 via-rose-600 to-red-600"
+      gradient: "from-emerald-600 via-green-600 to-teal-600"
     },
     {
       id: 4,
-      title: "Weather Analytics API",
-      description: "REST API for weather data with advanced analytics",
-      image: "/project4.jpg",
-      technologies: ["Express.js", "Python", "Redis", "Docker"],
-      category: "backend",
-      githubUrl: "https://github.com/votre-username/weather-api",
-      liveUrl: "https://weather-api-docs.vercel.app",
-      featured: false,
+      title: "Insurance Claims Microservices",
+      description: "Enterprise insurance and claims management platform with microservices architecture, featuring comprehensive monitoring, CI/CD pipeline, and containerized deployment",
+      image: "/insurance.jpg",
+      technologies: ["Spring Boot", "Angular", "Docker", "Jenkins", "Prometheus", "Grafana", "SonarQube", "Zipkin", "API Gateway"],
+      category: "Cloud Devops",
+      githubUrl: "https://github.com/elabdioui/Sinistre",
+      liveUrl: "/404",
+      featured: true,
       gradient: "from-orange-600 via-amber-600 to-yellow-600"
     },
     {
       id: 5,
-      title: "Crypto Dashboard",
-      description: "Real-time dashboard to track cryptocurrencies with charts",
-      image: "/project5.jpg",
-      technologies: ["React", "Chart.js", "WebSocket", "CoinGecko API"],
-      category: "frontend",
-      githubUrl: "https://github.com/votre-username/crypto-dashboard",
-      liveUrl: "https://crypto-tracker-live.vercel.app",
+      title: "WildRDyes Serverless Platform",
+      description: "Fully serverless application deployed on AWS, leveraging cloud-native services for scalable, secure, and cost-effective solution with serverless architecture",
+      image: "/wildrdyes.jpg",
+      technologies: ["AWS Lambda", "AWS Cognito", "API Gateway", "DynamoDB", "S3", "CloudFront", "IAM", "Node.js"],
+      category: "Cloud Devops",
+      githubUrl: "https://github.com/elabdioui/wildRydes-site",
+      liveUrl: "/404",
       featured: true,
-      gradient: "from-violet-600 via-purple-600 to-fuchsia-600"
+      gradient: "from-pink-600 via-rose-600 to-red-600"
     },
     {
       id: 6,
-      title: "Social Media Backend",
-      description: "Backend for social media application with microservices",
-      image: "/project6.jpg",
-      technologies: ["NestJS", "GraphQL", "PostgreSQL", "Kubernetes"],
-      category: "backend",
-      githubUrl: "https://github.com/votre-username/social-backend",
-      liveUrl: "https://social-api-docs.herokuapp.com",
+      title: "GC Systems Security",
+      description: "Professional landing page for security and fire protection company, featuring modern design, animations, and optimized performance with SEO implementation",
+      image: "/gcsystems.jpg",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "SEO", "Vercel"],
+      category: "frontend",
+      githubUrl: "https://github.com/elabdioui/gcsystems",
+      liveUrl: "https://www.gcsystems.ma",
+      featured: true,
+      gradient: "from-violet-600 via-purple-600 to-fuchsia-600"
+    },
+    //add a new project using django sqlite for a location of car rental system
+    {
+      id: 7,
+      title: "Car Rental System",
+      description: "A web application for managing car rentals, built with Django and SQLite",
+      image: "/car_rental.jpg",
+      technologies: ["Python", "Django", "SQLite", "HTML", "CSS", "JavaScript"],
+      category: "fullstack",
+      githubUrl: "https://github.com/elabdioui/Django-PFA",
+      liveUrl: "/404",
       featured: false,
       gradient: "from-slate-600 via-gray-600 to-zinc-600"
     }
+
   ];
 
   const filters: FilterData[] = [
-    { key: 'all', label: 'All Projects', icon: '🚀' },
-    { key: 'featured', label: 'Featured Projects', icon: '⭐' },
-    { key: 'fullstack', label: 'Full Stack', icon: '🔄' },
-    { key: 'frontend', label: 'Frontend', icon: '🎨' },
-    { key: 'backend', label: 'Backend', icon: '⚙️' }
+    { key: 'all', label: 'All Projects' },
+    { key: 'fullstack', label: 'Full Stack' },
+    { key: 'Cloud Devops', label: 'Cloud & DevOps' },
+    { key: 'backend', label: 'Backend' },
+    { key: 'frontend', label: 'Frontend' },
+    { key: 'ai', label: 'AI/ML' }
   ];
 
   const filteredProjects = projectsData.filter(project => {
@@ -97,75 +131,54 @@ export function Projects() {
     return project.category === activeFilter;
   });
 
-  const marqueeImages = filteredProjects.map(project => ({
-    src: project.image,
-    alt: project.title,
-    href: project.liveUrl,
-    target: "_blank",
-    data: {
-      title: project.title,
-      description: project.description,
-      technologies: project.technologies,
-      githubUrl: project.githubUrl
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }),
+    hover: {
+      y: -10,
+      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
     }
-  }));
-
-  const handleImageClick = (image, index) => {
-    console.log(`Clicked on ${image.alt}`, image.data);
-    window.open(image.href, "_blank");
   };
 
   return (
     <section id="projects" className="relative min-h-screen">
-      {/* ✅ SUPPRESSION du background pour laisser passer le DotGrid */}
       <FloatingParticles />
       
       <div className="max-w-7xl mx-auto relative z-10 px-6 lg:px-8 py-20">
-        {/* Header amélioré avec animations */}
+        {/* Header Section */}
         <div className="text-center mb-20">
           <div className="relative inline-block mb-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
-            <div className="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl">
-              <svg className="w-10 h-10 text-white animate-bounce" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-              </svg>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 blur-3xl"></div>
           </div>
           
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-            My{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-              Projects
-            </span>
+            My Projects
           </h2>
           
           <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-            Discover my technical achievements, from modern web applications to robust backend APIs
+            Explore my portfolio of innovative applications showcasing modern technologies
+            and creative problem-solving
           </p>
-          
-          {/* Stats animées */}
-          <div className="flex justify-center gap-8 mt-12">
-            {[
-              { number: "20+", label: "Projects Built" },
-              { number: "8+", label: "Technologies" },
-              { number: "3", label: "Years Experience" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* Filtres avec design amélioré */}
+        {/* Filter Buttons */}
         <div className="flex justify-center mb-16">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl"></div>
             <div className="relative bg-black/20 backdrop-blur-xl border border-white/10 rounded-3xl p-3 shadow-2xl">
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 justify-center">
                 {filters.map((filter) => (
                   <button
                     key={filter.key}
@@ -176,8 +189,7 @@ export function Projects() {
                         : 'text-gray-300 hover:text-white hover:bg-white/10 hover:scale-105'
                     }`}
                   >
-                    <span className="text-lg">{filter.icon}</span>
-                    <span className="hidden sm:inline">{filter.label}</span>
+                    <span>{filter.label}</span>
                     
                     {activeFilter === filter.key && (
                       <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 animate-pulse"></div>
@@ -189,115 +201,133 @@ export function Projects() {
           </div>
         </div>
 
-        {/* 3D Marquee avec wrapper amélioré */}
-        <div className="relative mb-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-3xl blur-3xl"></div>
-          <div className="relative bg-black/10 backdrop-blur-sm border border-white/5 rounded-3xl p-8">
-            <ThreeDMarquee 
-              images={marqueeImages}
-              cols={3}
-              className="bg-transparent dark:bg-transparent"
-              onImageClick={handleImageClick}
-            />
-          </div>
-        </div>
-
-        {/* Project Details avec design amélioré */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          {filteredProjects.slice(0, 3).map((project, index) => (
-            <div 
-              key={project.id} 
-              className="group relative overflow-hidden"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              {/* Background gradient animé */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-2xl blur-xl`}></div>
-              
-              <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/10">
-                {/* Badge featured */}
-                {project.featured && (
-                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                    <span>⭐</span>
-                    <span>Featured</span>
-                  </div>
-                )}
+        {/* Projects Grid - Beautiful Cards with Images */}
+        {filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {filteredProjects.map((project, index) => (
+              <motion.div 
+                key={project.id} 
+                className="group relative overflow-hidden rounded-2xl"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+                custom={index}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
+                {/* Glow effect behind card */}
+                <div className={`absolute -inset-0.5 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-70 rounded-2xl blur-lg transition-all duration-500`}></div>
                 
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center shadow-lg`}>
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
+                {/* Card content */}
+                <div className="relative bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-2xl h-full flex flex-col transition-all duration-500 overflow-hidden">
+                  {/* Project Image */}
+                  <div className="relative h-52 w-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-10"></div>
+                    <Image
+                      src={project.image || "/placeholder-project.jpg"}
+                      alt={project.title}
+                      className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    
+                   
+                    
+                    {/* Category Tag */}
+                    <div className="absolute bottom-3 left-3 z-20 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium border border-white/20">
+                      {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
+                  
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-gray-400">{project.category}</p>
+                    
+                    {/* Description */}
+                    <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-1">
+                      {project.description}
+                    </p>
+                    
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.technologies.slice(0, 4).map((tech, i) => (
+                        <span 
+                          key={i} 
+                          className="px-2 py-1 bg-white/10 border border-white/10 rounded-md text-xs text-blue-300 transition-all duration-200"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="px-2 py-1 bg-purple-500/20 border border-purple-500/30 rounded-md text-xs text-purple-300 font-semibold">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Action Buttons */}
+                    <div className="flex justify-between items-center pt-4 border-t border-white/10">
+                      <a 
+                        href={project.githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group/btn flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors duration-300"
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        <span className="font-medium">Code</span>
+                      </a>
+                      
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group/btn relative overflow-hidden flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-105"
+                      >
+                        <span>Live Demo</span>
+                        <svg className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700"></div>
+                      </a>
+                    </div>
                   </div>
                 </div>
-                
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.slice(0, 3).map((tech, i) => (
-                    <span 
-                      key={i} 
-                      className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg text-xs text-gray-300 hover:bg-white/20 transition-colors duration-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-lg text-xs text-blue-300">
-                      +{project.technologies.length - 3} more
-                    </span>
-                  )}
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group/btn flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-all duration-300 hover:scale-105"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
-                    </svg>
-                    <span>Code</span>
-                  </a>
-                  
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group/btn flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                  >
-                    <span>Demo</span>
-                    <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <motion.div 
+            className="text-center py-16 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-2xl font-bold text-white mb-2">No projects found</h3>
+            <p className="text-gray-400">No projects match the selected filter. Please try another category.</p>
+          </motion.div>
+        )}
 
-        {/* CTA Section améliorée */}
-        <div className="text-center">
+        {/* Contact CTA Section */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-3xl"></div>
-            <div className="relative bg-black/20 backdrop-blur-xl border border-white/10 rounded-3xl p-12">
+            <div className="relative bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl p-12">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Interested in my work?
+                Interested in working together?
               </h3>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                I am always open to new projects and exciting collaborations. 
-                Let's create something amazing together!
+              <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+                I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -308,29 +338,18 @@ export function Projects() {
                       element.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-4 px-8 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-3"
+                  className="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-4 px-10 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 flex items-center justify-center gap-3"
                 >
-                  <span>Let's discuss your project</span>
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="text-lg">Let's Connect</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                 </button>
-                
-                <a
-                  href="/cv-votre-nom.pdf"
-                  download
-                  className="group relative overflow-hidden bg-white/10 hover:bg-white/20 border border-white/20 text-white py-4 px-8 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>Download CV</span>
-                </a>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,19 +1,14 @@
 import { h1 } from "framer-motion/client";
 import { FlipText } from "@/components/ui/magicui/flip-text";
-import { ShinyText } from "@/components/ui/lightswind/shiny-text";
 // Translate the entire section into English    
 export default function About() {
     return (
         <section id="about" className="min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-6xl font-extrabold text-white mb-16 text-center">
-          <ShinyText
-            className="inline-block"
-            baseColor="#ffffff"
-            shineColor="#7dd3fc"
-          >
+          
             About Me
-          </ShinyText>
+          
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
@@ -21,11 +16,11 @@ export default function About() {
           <div className="lg:col-span-1 text-center">
             <div className="relative inline-block">
               <img
-                src="/votre-photo.jpg"
+                src="/haitham.jpg"
                 alt="Votre nom"
                 className="w-48 h-48 rounded-full object-cover border-4 border-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"
               />
-              <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 rounded-full border-2 border-black"></div>
+             
             </div>
             <h3 className="text-3xl font-bold text-white mb-2">Haitham El Abdioui</h3>
             <div className="flex items-center justify-center text-gray-400 mb-4 text-lg font-medium">
@@ -45,7 +40,7 @@ export default function About() {
                 </svg>
               </div>
               <h4 className="text-2xl font-bold text-white mb-3">Education</h4>
-              <p className="text-gray-400 text-lg font-medium">Graduation in 2026 Insha'Allah</p>
+              <p className="text-gray-400 text-lg font-medium">Graduation in 2026 Insha&apos;Allah</p>
             </div>
 
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">

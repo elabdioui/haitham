@@ -15,13 +15,22 @@ interface Icon {
 interface IconCloudProps {
   icons?: React.ReactNode[];
   images?: string[];
+  canvasSize?: number; // Add prop to control canvas size
+  iconSize?: number;   // Add prop to control icon size
+  sphereRadius?: number; // Add prop to control sphere radius
 }
 
 function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export function IconCloud({ icons, images }: IconCloudProps) {
+export function IconCloud({ 
+  icons, 
+  images,
+  canvasSize = 700,    // Increased from 400 to 700
+  iconSize = 60,       // Increased from 40 to 60
+  sphereRadius = 200   // Increased from 100 to 200
+}: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -51,8 +60,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
 
     const newIconCanvases = items.map((item, index) => {
       const offscreen = document.createElement("canvas");
-      offscreen.width = 40;
-      offscreen.height = 40;
+      offscreen.width = iconSize;
+      offscreen.height = iconSize;
       const offCtx = offscreen.getContext("2d");
 
       if (offCtx) {
@@ -65,19 +74,21 @@ export function IconCloud({ icons, images }: IconCloudProps) {
             offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
 
             // Create circular clipping path
+            const radius = iconSize / 2;
             offCtx.beginPath();
-            offCtx.arc(20, 20, 20, 0, Math.PI * 2);
+            offCtx.arc(radius, radius, radius, 0, Math.PI * 2);
             offCtx.closePath();
             offCtx.clip();
 
             // Draw the image
-            offCtx.drawImage(img, 0, 0, 40, 40);
+            offCtx.drawImage(img, 0, 0, iconSize, iconSize);
 
             imagesLoadedRef.current[index] = true;
           };
         } else {
           // Handle SVG icons
-          offCtx.scale(0.4, 0.4);
+          const scaleFactor = iconSize / 100; // Scale based on icon size
+          offCtx.scale(scaleFactor, scaleFactor);
           const svgString = renderToString(item as React.ReactElement);
           const img = new Image();
           img.src = "data:image/svg+xml;base64," + btoa(svgString);
@@ -92,7 +103,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     });
 
     iconCanvasesRef.current = newIconCanvases;
-  }, [icons, images]);
+  }, [icons, images, iconSize]);
 
   // Generate initial icon positions on a sphere
   useEffect(() => {
@@ -113,16 +124,16 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       const z = Math.sin(phi) * r;
 
       newIcons.push({
-        x: x * 100,
-        y: y * 100,
-        z: z * 100,
+        x: x * sphereRadius,
+        y: y * sphereRadius,
+        z: z * sphereRadius,
         scale: 1,
         opacity: 1,
         id: i,
       });
     }
     setIconPositions(newIcons);
-  }, [icons, images]);
+  }, [icons, images, sphereRadius]);
 
   // Handle mouse events
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -148,8 +159,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       const screenX = canvasRef.current!.width / 2 + rotatedX;
       const screenY = canvasRef.current!.height / 2 + rotatedY;
 
-      const scale = (rotatedZ + 200) / 300;
-      const radius = 20 * scale;
+      const scale = (rotatedZ + sphereRadius * 2) / (sphereRadius * 3);
+      const radius = (iconSize / 2) * scale;
       const dx = x - screenX;
       const dy = y - screenY;
 
@@ -261,8 +272,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         const rotatedZ = icon.x * sinY + icon.z * cosY;
         const rotatedY = icon.y * cosX + rotatedZ * sinX;
 
-        const scale = (rotatedZ + 200) / 300;
-        const opacity = Math.max(0.2, Math.min(1, (rotatedZ + 150) / 200));
+        const scale = (rotatedZ + sphereRadius * 2) / (sphereRadius * 3);
+        const opacity = Math.max(0.2, Math.min(1, (rotatedZ + sphereRadius * 1.5) / (sphereRadius * 2)));
 
         ctx.save();
         ctx.translate(
@@ -272,24 +283,25 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         ctx.scale(scale, scale);
         ctx.globalAlpha = opacity;
 
+        const halfSize = iconSize / 2;
         if (icons || images) {
           // Only try to render icons/images if they exist
           if (
             iconCanvasesRef.current[index] &&
             imagesLoadedRef.current[index]
           ) {
-            ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40);
+            ctx.drawImage(iconCanvasesRef.current[index], -halfSize, -halfSize, iconSize, iconSize);
           }
         } else {
           // Show numbered circles if no icons/images are provided
           ctx.beginPath();
-          ctx.arc(0, 0, 20, 0, Math.PI * 2);
+          ctx.arc(0, 0, halfSize, 0, Math.PI * 2);
           ctx.fillStyle = "#4444ff";
           ctx.fill();
           ctx.fillStyle = "white";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.font = "16px Arial";
+          ctx.font = `${iconSize * 0.4}px Arial`;
           ctx.fillText(`${icon.id + 1}`, 0, 0);
         }
 
@@ -305,13 +317,13 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation]);
+  }, [icons, images, iconPositions, isDragging, mousePos, targetRotation, iconSize, sphereRadius]);
 
   return (
     <canvas
       ref={canvasRef}
-      width={400}
-      height={400}
+      width={canvasSize}
+      height={canvasSize}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
