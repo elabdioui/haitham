@@ -402,7 +402,7 @@ export function Contact() {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-8 max-w-2xl mx-auto">
             <blockquote className="text-xl text-gray-300 italic mb-4">
-              &ldquo;Code is like humor. When you have to explain it, it's bad.&rdquo;
+              &ldquo;Code is like humor. When you have to explain it, it&apos;s bad.&rdquo;
             </blockquote>
             <cite className="text-sm text-gray-500">— Cory House</cite>
           </div>

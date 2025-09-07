@@ -208,7 +208,6 @@ export function Projects() {
               <motion.div 
                 key={project.id} 
                 className="group relative overflow-hidden rounded-2xl"
-                variants={cardVariants}
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
@@ -327,7 +326,7 @@ export function Projects() {
                 Interested in working together?
               </h3>
               <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-                I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+                I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -340,7 +339,7 @@ export function Projects() {
                   }}
                   className="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-4 px-10 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 flex items-center justify-center gap-3"
                 >
-                  <span className="text-lg">Let's Connect</span>
+                  <span className="text-lg">Let&apos;s Connect</span>
                   <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
