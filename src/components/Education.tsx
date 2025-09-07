@@ -1,4 +1,5 @@
 "use client";
+import ShinyText from "./ui/ShinyText";
 import { Timeline } from "./ui/timeline";
 import { useState } from "react";
 
@@ -28,10 +29,7 @@ export default function Education() {
             Developed analytical thinking and scientific reasoning skills. Participated in 
             science competitions and extracurricular activities.
           </p>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Result:</span>
-            <span className="text-sm font-semibold text-green-400">Distinction</span>
-          </div>
+          
         </div>
       ),
     },
@@ -98,7 +96,9 @@ export default function Education() {
         {/* Custom header before the Timeline component */}
         <div className="text-center mb-8 px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Education</h2>
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+              <ShinyText text="Education" speed={3} disabled={false} />
+            </h2>
           </div>
         </div>
         

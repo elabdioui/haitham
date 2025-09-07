@@ -1,14 +1,13 @@
 import { h1 } from "framer-motion/client";
 import { FlipText } from "@/components/ui/magicui/flip-text";
+import ShinyText from "./ui/ShinyText";
 // Translate the entire section into English    
 export default function About() {
     return (
         <section id="about" className="min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-6xl font-extrabold text-white mb-16 text-center">
-          
-            About Me
-          
+          <ShinyText text="About Me" speed={3} disabled={false} />
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">

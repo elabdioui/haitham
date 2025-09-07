@@ -21,6 +21,14 @@ export interface Carousel3DItem {
   tags: string[];
   imageUrl: string;
   link: string;
+  hideOverlayText?: boolean; // Nouvelle propriété optionnelle
+}
+
+interface ImageConfig {
+  showOverlayText?: boolean;
+  backgroundSize?: string;
+  backgroundPosition?: string;
+  backgroundRepeat?: string;
 }
 
 interface Carousel3DProps {
@@ -31,7 +39,7 @@ interface Carousel3DProps {
   title?: string;
   subtitle?: string;
   tagline?: string;
-  isMobileSwipe?: boolean;
+  imageConfig?: ImageConfig; // Nouvelle propriété pour configurer les images
 }
 
 const Carousel3D = ({
@@ -43,6 +51,7 @@ const Carousel3D = ({
   subtitle = "Customer Cases",
   tagline = "Explore how our textile sensor technology is revolutionizing multiple industries with intelligent fabric solutions tailored to specific needs.",
   isMobileSwipe = true,
+  imageConfig, // Récupérer la nouvelle prop ici
 }: Carousel3DProps) => {
   const [active, setActive] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -130,22 +139,14 @@ const Carousel3D = ({
                 hover:shadow-md flex flex-col`}
                 >
                   <div
-                    className="relative bg-black p-6 flex items-center justify-center h-48 overflow-hidden"
+                    className="relative bg-black p-0 flex items-center justify-center h-60 overflow-hidden" // J'ai augmenté la hauteur à h-60 et retiré le padding p-6
                     style={{
                       backgroundImage: `url(${item.imageUrl})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      backgroundSize: imageConfig?.backgroundSize || "cover",
+                      backgroundPosition: imageConfig?.backgroundPosition || "center",
+                      backgroundRepeat: imageConfig?.backgroundRepeat || "no-repeat",
                     }}
-                  >
-                    <div className="absolute inset-0 bg-black/50" />
-                    <div className="relative z-10 text-center text-white">
-                      <h3 className="text-2xl font-bold mb-2">
-                        {item.brand.toUpperCase()}
-                      </h3>
-                      <div className="w-12 h-1 bg-white mx-auto mb-2" />
-                      <p className="text-sm ">{item.title}</p>
-                    </div>
-                  </div>
+                  />
 
                   <CardContent className="p-6 flex flex-col flex-grow">
                     <h3 className="text-xl font-bold mb-1 text-foreground">

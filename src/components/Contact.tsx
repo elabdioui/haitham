@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import ShinyText from './ui/ShinyText';
 
 // Types for the form
 interface FormData {
@@ -182,7 +183,7 @@ export function Contact() {
             </svg>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Let&apos;s work  <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Together</span>
+            <ShinyText text="Get in Touch" speed={3} disabled={false} />
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Any ideas? Collaboration? I am always open to any contribution or project. Don&apos;t hesitate to contact me using the form below or via my social networks.

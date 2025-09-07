@@ -1,6 +1,7 @@
 "use client";
 
 import { IconCloud } from "@/components/ui/magicui/icon-cloud";
+import ShinyText from "./ui/ShinyText";
 
 const slugs = [
   "typescript",
@@ -82,8 +83,10 @@ export default function Skills() {
   return (
     <section id="skills" className="min-h-screen flex items-center justify-center px-6 lg:px-8 py-20">
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-4xl font-bold text-white mb-16 text-center">Skills</h2>
-  
+        <h2 className="text-4xl font-bold text-white mb-16 text-center">
+          <ShinyText text="Skills" speed={3} disabled={false} />
+        </h2>
+
         <div className="relative flex w-full items-center justify-center overflow-hidden">
           <IconCloud
             images={images}
