@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans } from "next/font/google";
 import DotGrid from "@/components/ui/DotGrid";
-
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 // Load Nunito Sans
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -36,7 +37,8 @@ export default function RootLayout({
           resistance={750}
           returnDuration={1.5}
         />
-        
+        <Analytics />
+        <SpeedInsights />
         {/* Contenu du site */}
         {children}
       </body>
