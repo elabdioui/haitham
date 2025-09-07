@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import ShinyText from './ui/ShinyText';
+
 
 // Types for the form
 interface FormData {
@@ -177,13 +177,9 @@ export function Contact() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl mb-6">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </div>
+         
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            <ShinyText text="Get in Touch" speed={3} disabled={false} />
+            Get in Touch
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Any ideas? Collaboration? I am always open to any contribution or project. Don&apos;t hesitate to contact me using the form below or via my social networks.

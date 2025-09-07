@@ -1,19 +1,11 @@
-// components/Carousel3D.tsx
 "use client";
 
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  TouchEvent,
-  ReactNode,
-} from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card"; // Adjust to your actual path
-import { useIsMobile } from "../../hooks/use-mobile";
 import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
 
-export interface Carousel3DItem {
+interface CarouselItem {
   id: number;
   title: string;
   brand: string;
@@ -21,78 +13,69 @@ export interface Carousel3DItem {
   tags: string[];
   imageUrl: string;
   link: string;
-  hideOverlayText?: boolean; // Nouvelle propriété optionnelle
 }
 
 interface ImageConfig {
-  showOverlayText?: boolean;
   backgroundSize?: string;
   backgroundPosition?: string;
   backgroundRepeat?: string;
 }
 
 interface Carousel3DProps {
-  items: Carousel3DItem[];
-  autoRotate?: boolean;
-  rotateInterval?: number;
+  items: CarouselItem[];
   cardHeight?: number;
-  title?: string;
-  subtitle?: string;
-  tagline?: string;
-  imageConfig?: ImageConfig; // Nouvelle propriété pour configurer les images
+  imageConfig?: ImageConfig;
+  autoSlide?: boolean;
+  autoSlideDelay?: number;
 }
 
-const Carousel3D = ({
+const Carousel3D: React.FC<Carousel3DProps> = ({
   items,
-  autoRotate = true,
-  rotateInterval = 4000,
   cardHeight = 500,
-  title = "From Textile to Intelligence",
-  subtitle = "Customer Cases",
-  tagline = "Explore how our textile sensor technology is revolutionizing multiple industries with intelligent fabric solutions tailored to specific needs.",
-  imageConfig, // Récupérer la nouvelle prop ici
-}: Carousel3DProps) => {
+  imageConfig,
+  autoSlide = true,
+  autoSlideDelay = 3000,
+}) => {
   const [active, setActive] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const isMobile = useIsMobile();
-  const minSwipeDistance = 50;
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (autoRotate && isInView && !isHovering) {
-      const interval = setInterval(() => {
-        setActive((prev) => (prev + 1) % items.length);
-      }, rotateInterval);
-      return () => clearInterval(interval);
-    }
-  }, [isInView, isHovering, autoRotate, rotateInterval, items.length]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    return () => observer.disconnect();
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const onTouchStart = (e: TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
+  useEffect(() => {
+    if (!autoSlide || isHovering) return;
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % items.length);
+    }, autoSlideDelay);
+    return () => clearInterval(interval);
+  }, [items.length, autoSlide, autoSlideDelay, isHovering]);
+
+  const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const onTouchMove = (e: TouchEvent) => {
+  const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    if (distance > minSwipeDistance) {
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
       setActive((prev) => (prev + 1) % items.length);
-    } else if (distance < -minSwipeDistance) {
+    } else if (isRightSwipe) {
       setActive((prev) => (prev - 1 + items.length) % items.length);
     }
   };
@@ -109,15 +92,11 @@ const Carousel3D = ({
   return (
     <section
       id="carousel3d"
-      className="bg-transparent min-w-full mx-aut 
-    flex items-center justify-center"
+      className="bg-transparent min-w-full mx-auto flex items-center justify-center"
     >
-      <div
-        className="w-full px-4 sm:px-6 lg:px-8 
-      min-w-[350px] md:min-w-[1000px] max-w-7xl  "
-      >
+      <div className="w-full px-4 sm:px-6 lg:px-8 min-w-[350px] md:min-w-[1000px] max-w-7xl">
         <div
-          className="relative overflow-hidden h-[550px] "
+          className="relative overflow-hidden h-[550px]"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onTouchStart={onTouchStart}
@@ -125,7 +104,7 @@ const Carousel3D = ({
           onTouchEnd={onTouchEnd}
           ref={carouselRef}
         >
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center ">
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
             {items.map((item, index) => (
               <div
                 key={item.id}
@@ -134,11 +113,11 @@ const Carousel3D = ({
                 )}`}
               >
                 <Card
-                  className={`overflow-hidden bg-background h-[${cardHeight}px] border shadow-sm 
-                hover:shadow-md flex flex-col`}
+                  className={`overflow-hidden bg-card border-border h-[${cardHeight}px] border shadow-lg 
+                hover:shadow-xl flex flex-col transition-all duration-300`}
                 >
                   <div
-                    className="relative bg-black p-0 flex items-center justify-center h-60 overflow-hidden" // J'ai augmenté la hauteur à h-60 et retiré le padding p-6
+                    className="relative bg-black p-0 flex items-center justify-center h-60 overflow-hidden"
                     style={{
                       backgroundImage: `url(${item.imageUrl})`,
                       backgroundSize: imageConfig?.backgroundSize || "cover",
@@ -147,14 +126,14 @@ const Carousel3D = ({
                     }}
                   />
 
-                  <CardContent className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-xl font-bold mb-1 text-foreground">
+                  <CardContent className="p-6 flex flex-col flex-grow bg-card">
+                    <h3 className="text-xl font-bold mb-1 text-card-foreground">
                       {item.title}
                     </h3>
-                    <p className="text-gray-500 text-sm font-medium mb-2">
+                    <p className="text-muted-foreground text-sm font-medium mb-2">
                       {item.brand}
                     </p>
-                    <p className="text-gray-600 text-sm flex-grow">
+                    <p className="text-muted-foreground text-sm flex-grow">
                       {item.description}
                     </p>
 
@@ -163,7 +142,7 @@ const Carousel3D = ({
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-gray-50 text-gray-600 rounded-full text-xs animate-pulse-slow"
+                            className="px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs animate-pulse-slow border border-border"
                           >
                             {tag}
                           </span>
@@ -172,7 +151,7 @@ const Carousel3D = ({
 
                       <Link
                         href={item.link}
-                        className="text-gray-500 flex items-center hover:underline relative group"
+                        className="text-muted-foreground flex items-center hover:text-card-foreground transition-colors relative group"
                         onClick={() => {
                           if (item.link.startsWith("/")) {
                             window.scrollTo(0, 0);
@@ -181,7 +160,7 @@ const Carousel3D = ({
                       >
                         <span className="relative z-10">Learn more</span>
                         <ArrowRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
-                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-500 transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-muted-foreground transition-all duration-300 group-hover:w-full"></span>
                       </Link>
                     </div>
                   </CardContent>
@@ -193,7 +172,7 @@ const Carousel3D = ({
           {!isMobile && (
             <>
               <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center text-muted-foreground hover:bg-card hover:text-card-foreground z-30 shadow-lg transition-all hover:scale-110 border border-border"
                 onClick={() =>
                   setActive((prev) => (prev - 1 + items.length) % items.length)
                 }
@@ -202,7 +181,7 @@ const Carousel3D = ({
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-gray-500 hover:bg-white z-30 shadow-md transition-all hover:scale-110"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center text-muted-foreground hover:bg-card hover:text-card-foreground z-30 shadow-lg transition-all hover:scale-110 border border-border"
                 onClick={() => setActive((prev) => (prev + 1) % items.length)}
                 aria-label="Next"
               >
@@ -215,10 +194,10 @@ const Carousel3D = ({
             {items.map((_, idx) => (
               <button
                 key={idx}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 border border-border ${
                   active === idx
-                    ? "bg-gray-500 w-5"
-                    : "bg-gray-200 hover:bg-gray-300"
+                    ? "bg-card-foreground w-5"
+                    : "bg-muted hover:bg-muted-foreground"
                 }`}
                 onClick={() => setActive(idx)}
                 aria-label={`Go to item ${idx + 1}`}

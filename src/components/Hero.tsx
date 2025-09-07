@@ -3,6 +3,7 @@ import { AuroraText } from "@/components/ui/magicui/aurora-text";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import { FlipText } from "@/components/ui/magicui/flip-text";
 import { RainbowButton } from "./ui/magicui/rainbow-button";
+import Link from 'next/link';
 
 const words = "Passionate about web and mobile development, I create modern and efficient applications using the latest technologies.";
 
@@ -38,8 +39,12 @@ export default function Hero() {
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-x-6">
-            <RainbowButton >Voir mes projets</RainbowButton>
-            <RainbowButton>Me contacter</RainbowButton>
+            <Link href="#projects">
+              <RainbowButton>See My Projects</RainbowButton>
+            </Link>
+            <Link href="#contact">
+              <RainbowButton>Contact Me</RainbowButton>
+            </Link>
           </div>
         </div>
       </div>

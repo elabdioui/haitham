@@ -1,39 +1,46 @@
 "use client";
 import { useState } from "react";
-import Carousel3D, { Carousel3DItem } from "./ui/lightswind/3d-carousel";
-import ShinyText from "./ui/ShinyText";
+import Carousel3D from "./ui/lightswind/3d-carousel";
+
+
+interface CarouselItem {
+  id: number;
+  title: string;
+  brand: string;
+  description: string;
+  tags: string[];
+  imageUrl: string;
+  link: string;
+}
 
 export default function Experience() {
-  const experienceItems: Carousel3DItem[] = [
+  const experienceItems: CarouselItem[] = [
     {
       id: 1,
-      title: "Full Stack Developer Intern",
+      title: "FullStack Developer - ERP JorfLasfarHubSecurity",
       brand: "OCP Maintenance Solutions",
-      description: "Working on web application development using modern technologies. Contributing to both frontend and backend development of enterprise solutions for maintenance management systems.",
-      tags: ["React", "Next.js", "TypeScript", "Node.js", "SQL"],
-      imageUrl: "ocpms.png", // Image du logo OCPMS
-      link: "#ocp-experience",
-      hideOverlayText: true // Ajout de cette propriété pour masquer le texte sur l'image
+      description: "Development of an ERP system dedicated to HSE operations with real-time dashboards for Jorf Lasfar and Safi sites. Implemented comprehensive safety management solutions with advanced monitoring capabilities.",
+      tags: ["MySQL", "Laravel", "Vue.js", "GitLab CI/CD", "Docker", "ERP", "HSE"],
+      imageUrl: "/ocpms.png", 
+      link: "https://ocp-ms.com/"
     },
     {
       id: 2,
-      title: "Frontend Developer",
-      brand: "Personal Projects",
-      description: "Development of responsive web applications and portfolio projects. Creating user interfaces with modern frameworks and focusing on performance optimization and user experience.",
-      tags: ["React", "TailwindCSS", "JavaScript", "Git", "Responsive Design"],
-      imageUrl: "ola.png", // Image du logo
-      link: "#frontend-projects",
-      hideOverlayText: true // Masquer le texte sur l'image
+      title: "Software Engineer & Data Analyst - LPG IN THE BOX",
+      brand: "OLA-Energy",
+      description: "Design and development of a stock and inventory management application with CMMS tool enhancement. Created efficient data analysis workflows and automated reporting systems for inventory optimization.",
+      tags: ["VBA", "Power Apps", "Power BI", "Data Analysis", "CMMS", "Inventory Management"],
+      imageUrl: "/ola.png", 
+      link: "https://olaenergy.com/"
     },
     {
       id: 3,
-      title: "Student Developer",
-      brand: "University Projects",
-      description: "Collaborative development of academic projects, focusing on fundamental programming concepts and software development methodologies. Learning through practical application of theoretical knowledge.",
-      tags: ["Java", "Python", "Algorithms", "Data Structures", "Teamwork"],
-      imageUrl: "sews.png", // Image du logo
-      link: "#university-projects",
-      hideOverlayText: true // Masquer le texte sur l'image
+      title: "IT Service - Python Developer",
+      brand: "SEWS-CABIND",
+      description: "Development of a billing management website with automated Excel data import. Streamlined billing processes through automation and created efficient data processing pipelines for financial management.",
+      tags: ["Django", "Python", "Pandas", "Excel", "Automation", "Billing Management"],
+      imageUrl: "/sews.png", // You'll need to add this image
+      link: "https://www.sews-cabind.com/scm/"
     }
   ];
 
@@ -43,29 +50,31 @@ export default function Experience() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            <ShinyText text="Professional Experience" speed={3} disabled={false} />
+            Experience
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            My journey in web development and software engineering
+            My journey in software development, from ERP systems to data analysis and web applications
           </p>
         </div>
+
+       
 
         {/* 3D Carousel */}
         <Carousel3D 
           items={experienceItems}
-          autoRotate={true}
-          rotateInterval={5000}
-          cardHeight={450}
-          title="Professional Experience"
-          subtitle="My Path"
-          tagline="Explore my journey through different roles and projects in web development."
+          autoSlide={true}
+          autoSlideDelay={6000}
+          cardHeight={480}
           imageConfig={{
-            showOverlayText: false,
-            backgroundSize: "cover", // "contain" pour voir tout le logo
+            backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat"
           }}
         />
+
+        
+
+      
       </div>
     </section>
   );

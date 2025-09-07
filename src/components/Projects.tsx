@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { FloatingParticles } from './ui/card3D';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import ShinyText from './ui/ShinyText';
+
 
 interface ProjectData {
   id: number;
@@ -165,7 +165,7 @@ export function Projects() {
           </div>
           
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-            <ShinyText text="My Projects" speed={3} disabled={false} />
+            My Projects
           </h2>
           
           <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
