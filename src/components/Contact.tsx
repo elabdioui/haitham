@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
-//translate to english
 // Types for the form
 interface FormData {
   name: string;
@@ -29,9 +29,10 @@ export function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Réseaux sociaux
+  // Social networks
   const socialLinks = [
     {
       name: 'GitHub',
@@ -56,7 +57,7 @@ export function Contact() {
   
     {
       name: 'Discord',
-      url: 'https://discord.com/users/votre-id',
+      url: 'https://discord.com/users/yourid',
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
@@ -67,12 +68,12 @@ export function Contact() {
    
   ];
 
-  // Validation du formulaire
+  // Form validation
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'your name is required';
+      newErrors.name = 'Your name is required';
     }
 
     if (!formData.email.trim()) {
@@ -95,38 +96,58 @@ export function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Gestion de la soumission
+  // Handle form submission with EmailJS
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) return;
 
     setIsLoading(true);
+    setErrorMessage(null);
 
     try {
-      // Ici vous ajouterez l'intégration EmailJS
-      // await emailjs.send('service_id', 'template_id', formData, 'public_key');
+      // Replace these values with your actual EmailJS credentials
+      const serviceId = 'service_4ye5xn7'; // e.g., 'service_abc123'
+      const templateId = 'template_cke6e3g'; // e.g., 'template_xyz789'
+      const publicKey = 'hhE0v__Y0x38n_ETR'; // e.g., 'abc123xyz789'
       
-      // Simulation d'envoi
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Prepare template parameters (make sure they match your EmailJS template variables)
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: 'Haitham', // Your name or your site name
+      };
       
+      // Send the email using EmailJS
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+      
+      console.log('Email sent successfully:', result.text);
       setIsSuccess(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
       
+      // Hide success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
-      console.error('Erreur lors de l\'envoi:', error);
+      console.error('Error sending email:', error);
+      setErrorMessage('Failed to send message. Please try again later.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Gestion des changements
+  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Effacer l'erreur si l'utilisateur commence à taper
+    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -135,7 +156,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="min-h-screen px-6 lg:px-8 py-20 relative overflow-hidden">
-      {/* Background animé */}
+      {/* Animated background */}
       <div className="absolute inset-0 bg-transparent" />
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
@@ -163,24 +184,28 @@ export function Contact() {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Let&apos;s work  <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Together</span>
           </h2>
-          {/* translate to english */}
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-           Any ideas ? Collaboration ? I am always open to any contribution or project. Don&apos;t hesitate to contact me using the form below or via my social networks.
+            Any ideas? Collaboration? I am always open to any contribution or project. Don&apos;t hesitate to contact me using the form below or via my social networks.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Formulaire de contact */}
+          {/* Contact form */}
           <div className="space-y-8">
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                
-               Contact me
+                Contact me
               </h3>
 
               {isSuccess && (
-                <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl"> {/* translate to english */}
+                <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl">
                   <p className="text-green-400 font-medium">Message sent successfully! I will respond shortly.</p>
+                </div>
+              )}
+
+              {errorMessage && (
+                <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl">
+                  <p className="text-red-400 font-medium">{errorMessage}</p>
                 </div>
               )}
 
@@ -291,12 +316,11 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Informations de contact et réseaux sociaux */}
+          {/* Contact information and social networks */}
           <div className="space-y-8">
-            {/* Informations personnelles */}
+            {/* Personal information */}
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                
                 My contact information
               </h3>
 
@@ -343,10 +367,9 @@ export function Contact() {
             </div>
 
             
-            {/* Réseaux sociaux */}
+            {/* Social networks */}
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                
                 Follow me
               </h3>
 
@@ -375,11 +398,11 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Footer avec citation */}
+        {/* Footer with quote */}
         <div className="text-center mt-16">
           <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-8 max-w-2xl mx-auto">
             <blockquote className="text-xl text-gray-300 italic mb-4">
-              &ldquo;Code is like humor. When you have to explain it, it’s bad.&rdquo;
+              &ldquo;Code is like humor. When you have to explain it, it's bad.&rdquo;
             </blockquote>
             <cite className="text-sm text-gray-500">— Cory House</cite>
           </div>
