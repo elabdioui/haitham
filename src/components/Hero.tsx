@@ -1,7 +1,6 @@
 "use client"
 import { AuroraText } from "@/components/ui/magicui/aurora-text";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
-import { FlipText } from "@/components/ui/magicui/flip-text";
 import { RainbowButton } from "./ui/magicui/rainbow-button";
 import Link from 'next/link';
 
@@ -39,10 +38,26 @@ export default function Hero() {
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-x-6">
-            <Link href="#projects">
+            <Link
+              href="#projects"
+              onClick={() => {
+                const element = document.getElementById('projects');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <RainbowButton>See My Projects</RainbowButton>
             </Link>
-            <Link href="#contact">
+            <Link href="#contact"
+
+              onClick={() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <RainbowButton>Contact Me</RainbowButton>
             </Link>
           </div>

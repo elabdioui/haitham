@@ -113,8 +113,8 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                 )}`}
               >
                 <Card
-                  className={`overflow-hidden bg-card border-border h-[${cardHeight}px] border shadow-lg 
-                hover:shadow-xl flex flex-col transition-all duration-300`}
+                  className={`overflow-hidden bg-black/60 backdrop-blur-sm border-[#333] h-[${cardHeight}px] border shadow-lg 
+                  hover:shadow-[0_0_15px_rgba(120,50,255,0.3)] flex flex-col transition-all duration-300`}
                 >
                   <div
                     className="relative bg-black p-0 flex items-center justify-center h-60 overflow-hidden"
@@ -124,16 +124,19 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                       backgroundPosition: imageConfig?.backgroundPosition || "center",
                       backgroundRepeat: imageConfig?.backgroundRepeat || "no-repeat",
                     }}
-                  />
+                  >
+                    {/* Dark overlay for better text contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  </div>
 
-                  <CardContent className="p-6 flex flex-col flex-grow bg-card">
-                    <h3 className="text-xl font-bold mb-1 text-card-foreground">
+                  <CardContent className="p-6 flex flex-col flex-grow bg-gradient-to-b from-black/80 to-black/95 text-white">
+                    <h3 className="text-xl font-bold mb-1 text-white">
                       {item.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm font-medium mb-2">
+                    <p className="text-purple-300 text-sm font-medium mb-2">
                       {item.brand}
                     </p>
-                    <p className="text-muted-foreground text-sm flex-grow">
+                    <p className="text-gray-300 text-sm flex-grow">
                       {item.description}
                     </p>
 
@@ -142,7 +145,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs animate-pulse-slow border border-border"
+                            className="px-2 py-1 bg-indigo-900/40 text-blue-300 rounded-full text-xs border border-indigo-500/30 backdrop-blur-sm"
                           >
                             {tag}
                           </span>
@@ -151,7 +154,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
 
                       <Link
                         href={item.link}
-                        className="text-muted-foreground flex items-center hover:text-card-foreground transition-colors relative group"
+                        className="text-blue-400 flex items-center hover:text-purple-300 transition-colors relative group"
                         onClick={() => {
                           if (item.link.startsWith("/")) {
                             window.scrollTo(0, 0);
@@ -160,7 +163,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                       >
                         <span className="relative z-10">Learn more</span>
                         <ArrowRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
-                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-muted-foreground transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
                       </Link>
                     </div>
                   </CardContent>
@@ -172,7 +175,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
           {!isMobile && (
             <>
               <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center text-muted-foreground hover:bg-card hover:text-card-foreground z-30 shadow-lg transition-all hover:scale-110 border border-border"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-indigo-900/50 hover:text-white z-30 shadow-lg transition-all hover:scale-110 border border-indigo-500/30"
                 onClick={() =>
                   setActive((prev) => (prev - 1 + items.length) % items.length)
                 }
@@ -181,7 +184,7 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-card/80 backdrop-blur-sm rounded-full flex items-center justify-center text-muted-foreground hover:bg-card hover:text-card-foreground z-30 shadow-lg transition-all hover:scale-110 border border-border"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-indigo-900/50 hover:text-white z-30 shadow-lg transition-all hover:scale-110 border border-indigo-500/30"
                 onClick={() => setActive((prev) => (prev + 1) % items.length)}
                 aria-label="Next"
               >
@@ -194,10 +197,10 @@ const Carousel3D: React.FC<Carousel3DProps> = ({
             {items.map((_, idx) => (
               <button
                 key={idx}
-                className={`w-2 h-2 rounded-full transition-all duration-300 border border-border ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 border ${
                   active === idx
-                    ? "bg-card-foreground w-5"
-                    : "bg-muted hover:bg-muted-foreground"
+                    ? "bg-indigo-500 border-indigo-300 w-5 shadow-[0_0_8px_rgba(120,50,255,0.5)]"
+                    : "bg-gray-700 border-gray-600 hover:bg-indigo-400/50"
                 }`}
                 onClick={() => setActive(idx)}
                 aria-label={`Go to item ${idx + 1}`}

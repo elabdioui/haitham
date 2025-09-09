@@ -6,45 +6,7 @@ import Image from "next/image";
 
 export default function Education() {
   const educationData = [
-    {
-      title: "2020 - 2021",
-      content: (
-        <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-              Completed
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-4 mb-3">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-              <Image 
-                src="/YASSAMINE.jpeg" 
-                alt="Al Yassamine School" 
-                fill 
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white">Baccalaureate in Physics</h3>
-              <h4 className="text-lg font-semibold text-blue-400">Al Yassamine School</h4>
-            </div>
-          </div>
-          
-          <p className="text-sm text-gray-400 mb-3 flex items-center gap-1">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
-            Berrechid, Morocco
-          </p>
-          <p className="text-gray-300 text-sm leading-relaxed mb-3">
-            Completed secondary education with a focus on physics and mathematics. 
-            Developed analytical thinking and scientific reasoning skills. Participated in 
-            science competitions and extracurricular activities.
-          </p>
-        </div>
-      ),
-    },
+    
     {
       title: "2021 - 2023",
       content: (
@@ -123,6 +85,7 @@ export default function Education() {
         </div>
       ),
     },
+    
   ];
 
   return (
