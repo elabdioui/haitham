@@ -1,5 +1,5 @@
 import { h1 } from "framer-motion/client";
-import { FlipText } from "@/components/ui/magicui/flip-text";
+
 
 // Translate the entire section into English    
 export default function About() {
