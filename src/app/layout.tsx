@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   creator: "Haitham El Abdioui",
   publisher: "Haitham El Abdioui",
   alternates: {
-    canonical: "https://elabdioui.dev", // Replace with your actual domain
+    canonical: "https://elabdioui.dev", 
   },
   robots: {
     index: true,
@@ -40,38 +40,55 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://elabdioui.dev", // Replace with your actual domain
+    url: "https://elabdioui.dev",
     title: "Haitham El Abdioui | Software Engineer",
     description: "Software engineering student specializing in web development, cloud technologies, and innovative digital solutions.",
     siteName: "Haitham El Abdioui Portfolio",
     images: [
       {
-        url: "/og-image.jpg", // Create and add this image to your public folder
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Haitham El Abdioui - Software Engineer",
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Haitham El Abdioui | Software Engineer",
-    description: "Software engineering student specializing in web development, cloud technologies, and innovative digital solutions.",
-    creator: "@yourtwitterhandle", // Replace with your Twitter handle if you have one
-    images: ["/twitter-image.jpg"], // Create and add this image to your public folder
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
+  
   verification: {
-    // Add these if you have them
-    google: "google-site-verification-code",
-    yandex: "yandex-verification-code",
+    google: process.env.GOOGLE_SITE_VERIFICATION || "google-site-verification-code",
+    yandex: process.env.YANDEX_VERIFICATION || "yandex-verification-code",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Haitham El Abdioui",
+  },
+  formatDetection: {
+    telephone: true,
+    date: true,
+    address: true,
+    email: true,
+    url: true,
   },
 };
 
-// Add viewport settings
+// Improved viewport settings for mobile
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  minimumScale: 1,
   maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
@@ -85,23 +102,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${geist.variable} scroll-smooth`}>
-      <body className={`${geist.className} font-mono bg-black relative`}>
-        {/* Galaxy Background */}
+      <body className={`${geist.className} font-mono bg-black relative overflow-x-hidden`}>
+        {/* Galaxy Background with reduced settings for better mobile performance */}
         <div className="fixed inset-0 w-full h-full z-0">
           <Particles
             particleColors={['#ffffff', '#ffffff']}
-            particleCount={200}
-            particleSpread={10}
+            particleCount={100} // Reduced count for better mobile performance
+            particleSpread={7}
             speed={0.1}
-            particleBaseSize={100}
-            moveParticlesOnHover={true}
+            particleBaseSize={60} // Smaller particles for mobile
+            moveParticlesOnHover={false} // Disable hover effect for better mobile performance
             alphaParticles={false}
             disableRotation={false}
           />
         </div>
         
-        {/* Main content with higher z-index */}
-        <div className="relative z-10">
+        {/* Main content with higher z-index and mobile optimization */}
+        <div className="relative z-10 w-full max-w-full px-4 md:px-0">
           {children}
         </div>
         
