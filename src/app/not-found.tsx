@@ -33,7 +33,7 @@ export default function NotFound() {
     rotate: [0, 2, 0, -2, 0],
     transition: {
       duration: 5,
-      repeat: Infinity as const,
+      repeat: Infinity,
       ease: "easeInOut" as const
     }
   };
