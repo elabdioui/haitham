@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   creator: "Haitham El Abdioui",
   publisher: "Haitham El Abdioui",
   alternates: {
-    canonical: "https://yourwebsite.com", // Replace with your actual domain
+    canonical: "https://elabdioui.dev", // Replace with your actual domain
   },
   robots: {
     index: true,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://yourwebsite.com", // Replace with your actual domain
+    url: "https://elabdioui.dev", // Replace with your actual domain
     title: "Haitham El Abdioui | Software Engineer",
     description: "Software engineering student specializing in web development, cloud technologies, and innovative digital solutions.",
     siteName: "Haitham El Abdioui Portfolio",

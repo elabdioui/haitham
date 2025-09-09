@@ -13,17 +13,16 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Haitham El Abdioui",
-  "url": "https://yourwebsite.com", // Replace with your actual domain
-  "image": "https://yourwebsite.com/profile-photo.jpg", // Replace with your profile photo URL
+  "url": "https://elabdioui.dev", // Replace with your actual domain
+  "image": "https://elabdioui.dev/profile-photo.jpg", // Replace with your profile photo URL
   "sameAs": [
-    "https://linkedin.com/in/yourusername", // Replace with your actual profiles
-    "https://github.com/yourusername",
-    "https://twitter.com/yourusername"
+    "https://linkedin.com/in/haithamelabdioui",
+    "https://github.com/elabdioui",
   ],
   "jobTitle": "Software Engineer",
   "worksFor": {
     "@type": "Organization",
-    "name": "Your Company or University" // Replace with your current company or university
+    "name": "Moroccan School of Engineering" // Replace with your current company or university
   },
   "description": "Software engineering student specializing in web development, cloud technologies, and innovative digital solutions.",
   "knowsAbout": ["Web Development", "JavaScript", "React", "Next.js", "Cloud Computing"] // Add your skills

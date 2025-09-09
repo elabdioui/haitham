@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://yourwebsite.com/sitemap.xml', // Replace with your actual domain
+    sitemap: 'https://elabdioui.dev/sitemap.xml', // Replace with your actual domain
   }
 }
