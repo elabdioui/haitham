@@ -102,7 +102,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${geist.variable} scroll-smooth`}>
-      <body className={`${geist.className} font-mono bg-black relative overflow-x-hidden`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+      </head>
+      <body className={`${geist.className} font-mono bg-black relative w-full overflow-x-hidden`}>
         {/* Galaxy Background with reduced settings for better mobile performance */}
         <div className="fixed inset-0 w-full h-full z-0">
           <Particles
@@ -117,8 +120,8 @@ export default function RootLayout({
           />
         </div>
         
-        {/* Main content with higher z-index and mobile optimization */}
-        <div className="relative z-10 w-full max-w-full px-4 md:px-0">
+        {/* Main content with fixed width and overflow control */}
+        <div className="relative z-10 w-full max-w-[100vw] mx-auto">
           {children}
         </div>
         

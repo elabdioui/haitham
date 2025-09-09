@@ -107,7 +107,7 @@ export default function Education() {
             </div>
             <div>
               <h3 className="text-xl font-bold text-white">Baccalaureate in Physical Sciences</h3>
-              <h4 className="text-lg font-semibold text-blue-400">Groupe Scolaire Yassamine</h4>
+              <h4 className="text-lg font-semibold text-blue-400">Yassamine School</h4>
             </div>
           </div>
           
