@@ -3,7 +3,6 @@ import "./globals.css";
 import { Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Galaxy from "@/components/ui/Galaxy"
 import Particles from "@/components/ui/Particles";
 
 // Load Geist
